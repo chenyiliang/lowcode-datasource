@@ -1,28 +1,39 @@
 {
   "name": "@alilc/lowcode-datasource-url-params-handler",
   "version": "1.2.1",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "typings": "es/index.d.ts",
+  "description": "DataSource URL params handler for lowcode",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
-    "src",
-    "lib",
-    "es"
+    "dist"
   ],
   "scripts": {
-    "dev": "tsc --watch",
-    "clean": "rm -rf es lib",
-    "build": "npm run clean && tsc && tsc --outDir ./lib --module commonjs ",
-    "prepublishOnly": "npm run build"
+    "dev": "vite build --watch",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\"",
+    "build": "pnpm run clean && vite build",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@alilc/lowcode-datasource-types": "^1.2.1",
-    "query-string": "^6.13.1",
-    "typescript": "^4.6.2"
+    "@alilc/lowcode-datasource-types": "workspace:*",
+    "query-string": "^9.5.1"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "gitHead": "714230d68a17fc010fbe80b511802bb410188fb5"
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vite-plugin-dts": "^5.1.2"
+  }
 }

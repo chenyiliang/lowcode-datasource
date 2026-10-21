@@ -1,1 +1,1 @@
-module.exports = require('./dist/runtime/index');
+module.exports = require('./dist/runtime/index.cjs');
